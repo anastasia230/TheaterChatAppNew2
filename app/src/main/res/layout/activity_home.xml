@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/homeLayout"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="0dp"
+    android:background="@android:color/white"
+    tools:context=".HomeActivity">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Home"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp" />
+
+    <!-- Info icon placeholder -->
+    <ImageView
+        android:id="@+id/infoIcon"
+        android:layout_width="47dp"
+        android:layout_height="45dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="17dp"
+        android:src="@android:drawable/ic_menu_info_details" />
+
+    <!-- Chatbot Button -->
+
+    <!-- Contact Us Placeholder -->
+
+    <!-- Help Placeholder -->
+
+    <!-- Bottom navigation bar (simplified with icons) -->
+
+    <Button
+        android:id="@+id/chatbotButton"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_marginTop="147dp"
+        android:background="@drawable/button_background"
+        android:backgroundTint="#b9afff"
+        android:padding="16dp"
+        android:text="💬 Chatbot"
+        android:layout_centerHorizontal="true"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        />
+
+    <Button
+        android:id="@+id/contactUsButton"
+        android:layout_width="350sp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/chatbotButton"
+        android:layout_marginTop="77dp"
+        android:background="@drawable/button_background"
+        android:backgroundTint="#b9afff"
+        android:padding="16dp"
+        android:layout_centerHorizontal="true"
+        android:text="📞 Contact Us"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/helpButton"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/contactUsButton"
+        android:layout_marginTop="77dp"
+        android:background="@drawable/button_background"
+        android:backgroundTint="#b9afff"
+        android:padding="16dp"
+        android:text="❓ Help"
+        android:layout_centerHorizontal="true"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
+
+    <include
+        layout="@layout/bottom_nav"/>
+</RelativeLayout>
