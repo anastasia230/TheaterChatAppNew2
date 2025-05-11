@@ -4,9 +4,8 @@ import android.widget.TextView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-import androidx.appcompat.app.AppCompatActivity;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +25,12 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        // TODO: Implement Contact Us and Help later
+        setupBottomNav();
+
+        // TODO: Implement Contact Us
+    }
+    @Override
+    protected String getBottomNavType() {
+        return "home";
     }
 }

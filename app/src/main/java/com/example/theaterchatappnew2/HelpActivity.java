@@ -4,9 +4,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
-import androidx.appcompat.app.AppCompatActivity;
 
-public class HelpActivity extends AppCompatActivity {
+public class HelpActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,5 +27,12 @@ public class HelpActivity extends AppCompatActivity {
         settingsBtn.setOnClickListener(v -> {
             // Optional: open a settings activity
         });
+
+
+        setupBottomNav();
+    }
+    @Override
+    protected String getBottomNavType() {
+        return "home";
     }
 }
