@@ -91,11 +91,11 @@ def chatbot():
             available = shows[show]["times"].get(time, 0)
             if count > available:
                 user_states["current_step"] = None
-                return jsonify({"reply": f"❌ Sorry, only {available} seats are available for {show} at {time}."})
+                return jsonify({"reply": f" Sorry, only {available} seats are available for {show} at {time}."})
 
             shows[show]["times"][time] -= count
             user_states["current_step"] = None
-            return jsonify({"reply": f"✅ {count} ticket(s) booked for {show} at {time}. Enjoy the show! 🎭"})
+            return jsonify({"reply": f" {count} ticket(s) booked for {show} at {time}. Enjoy the show! "})
 
         elif "no" in user_message:
             user_states["current_step"] = None

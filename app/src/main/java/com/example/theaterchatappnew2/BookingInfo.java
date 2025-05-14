@@ -6,12 +6,15 @@ public class BookingInfo {
     public String seat;
     public String code;
     public String name;
+    public int seatCount;
 
-    public BookingInfo(String title, String datetime, String seat, String code, String name) {
+    public BookingInfo(String title, String datetime, String seat, String code, String name, int seatCount) {
         this.title = title;
         this.datetime = datetime;
         this.seat = seat;
         this.code = code;
         this.name = name;
+        this.seatCount = seatCount;
     }
 }
+
