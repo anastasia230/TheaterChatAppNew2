@@ -70,6 +70,12 @@ public class BookingManager {
         String json = gson.toJson(bookings);
         prefs.edit().putString(KEY_BOOKINGS, json).apply();
     }
+    public static void clearAllBookings() {
+        bookings.clear();
+        if (prefs != null) {
+            prefs.edit().remove(KEY_BOOKINGS).apply();
+        }
+    }
 
     private static void loadBookings() {
         if (prefs == null) return;

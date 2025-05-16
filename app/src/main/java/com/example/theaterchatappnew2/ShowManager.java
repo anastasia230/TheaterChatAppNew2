@@ -99,6 +99,12 @@ public class ShowManager {
     public static int getAvailableSeats(String show, String time) {
         return seatAvailability.getOrDefault(show.toLowerCase() + "_" + time, 0);
     }
+    public static void resetAll() {
+        for (String key : seatAvailability.keySet()) {
+            seatAvailability.put(key, MAX_SEATS_PER_SHOW);
+            seatPointer.put(key, 1);
+        }
+    }
 
     public static String suggestAlternative(String show) {
         for (String key : seatAvailability.keySet()) {

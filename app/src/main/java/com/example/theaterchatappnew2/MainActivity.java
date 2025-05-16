@@ -15,6 +15,8 @@ public class MainActivity extends BaseActivity {
 
     private EditText messageInput;
     private Button sendButton;
+    private boolean awaitingComplaint = false;
+
     private TextView chatMessages;
     private ScrollView scrollView;
 
@@ -38,7 +40,7 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // 🔁 Init shared seat state
+        //  Init shared seat state
         ShowManager.init(getApplicationContext());
 
         setupBottomNav();
@@ -63,6 +65,13 @@ public class MainActivity extends BaseActivity {
             }
         });
     }
+    private void saveComplaint(String user, String complaintText) {
+        SharedPreferences complaintPrefs = getSharedPreferences("ComplaintPrefs", MODE_PRIVATE);
+        String existing = complaintPrefs.getString(user, "");
+        String updated = existing + "\n- " + complaintText;
+        complaintPrefs.edit().putString(user, updated).apply();
+    }
+
 
     private void promptForUserName(SharedPreferences prefs) {
         EditText input = new EditText(this);
@@ -77,7 +86,7 @@ public class MainActivity extends BaseActivity {
                     currentUserName = input.getText().toString().trim();
                     if (currentUserName.isEmpty()) currentUserName = "Guest";
                     BookingManager.init(getApplicationContext(), currentUserName);
-                    appendChat("👋 Hello, " + currentUserName + "! Let's get started.");
+                    appendChat(" Hello, " + currentUserName + "! Let's get started.");
                 })
                 .show();
     }
@@ -112,6 +121,12 @@ public class MainActivity extends BaseActivity {
             known = true;
             awaitingShowChoice = true;
             appendChat("Which show would you like to book?\n- Hamlet\n- Romeo");
+            return;
+        }
+        if (message.equals("clear all")) {
+            BookingManager.clearAllBookings();
+            ShowManager.resetAll();
+            appendChat(" All bookings and seat availabilities have been reset.");
             return;
         }
 
@@ -195,9 +210,9 @@ public class MainActivity extends BaseActivity {
                             requestedSeats
                     );
                     BookingManager.addBooking(booking);
-                    appendChat("✅ Booking confirmed!\nShow: " + capitalize(pendingShow) + "\nTime: " + pendingTime + "\nSeats: " + seatInfo + "\nCode: " + code);
+                    appendChat(" Booking confirmed!\nShow: " + capitalize(pendingShow) + "\nTime: " + pendingTime + "\nSeats: " + seatInfo + "\nCode: " + code);
                 } else {
-                    appendChat("❌ Booking failed. Seats may no longer be available.");
+                    appendChat(" Booking failed. Seats may no longer be available.");
                 }
             } else {
                 appendChat("Booking cancelled.");
@@ -214,7 +229,7 @@ public class MainActivity extends BaseActivity {
             } else {
                 StringBuilder builder = new StringBuilder();
                 for (BookingInfo booking : bookings) {
-                    builder.append("🎭 ").append(booking.title)
+                    builder.append(" ").append(booking.title)
                             .append(" at ").append(booking.datetime)
                             .append(" | Seats: ").append(booking.seat)
                             .append(" | Code: ").append(booking.code)
@@ -222,6 +237,39 @@ public class MainActivity extends BaseActivity {
                 }
                 appendChat(builder.toString().trim());
             }
+            return;
+        }
+//  Πληροφορίες για παραστάσεις
+        if (message.contains("info") || message.contains("theater") || message.contains("show") || message.contains("play")) {
+            known = true;
+            appendChat(" Our theater features two plays:\n" +
+                    "- Hamlet: A classic tragedy by Shakespeare.\n" +
+                    "- Romeo: A romantic drama about forbidden love.\n" +
+                    "Each is performed at 18:00 and 21:00 daily in two separate halls.");
+            return;
+        }
+
+//  Παράπονα
+        if (message.contains("complaint") || message.contains("problem") || message.contains("issue") || message.contains("angry")) {
+            known = true;
+            awaitingComplaint = true;
+            appendChat("We're sorry to hear that. Please describe your issue and it will be forwarded to our support team.");
+            // (Μπορείς αργότερα να το αποθηκεύεις ή να ανοίγεις νέο activity)
+            return;
+        }
+        // ✍️ Αν περιμένουμε παράπονο, το αποθηκεύουμε
+        if (awaitingComplaint) {
+            saveComplaint(currentUserName, message);
+            appendChat(" Thank you! We filed your complaint. Our support team will look into it.\n" +
+                    " For more help, you may contact the box office at 699999999.");
+            awaitingComplaint = false;
+            return;
+        }
+
+//  Επικοινωνία με υπάλληλο
+        if (message.contains("talk") || message.contains("human") || message.contains("representative") || message.contains("someone") || message.contains("contact")) {
+            known = true;
+            appendChat(" You can contact a representative at the box office at: 6999999999");
             return;
         }
 
