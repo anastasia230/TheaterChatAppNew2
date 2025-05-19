@@ -1,44 +1,61 @@
 package com.example.theaterchatappnew2;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.content.Intent;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import com.example.theaterchatappnew2.models.Booking;
-import java.util.List;
-import java.util.ArrayList;
-import com.example.theaterchatappnew2.adapters.BookingAdapter;
+import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+
+import java.util.List;
 
 public class BookingsActivity extends BaseActivity {
 
-    private RecyclerView recyclerView;
-    private BookingAdapter adapter;
-    private List<Booking> bookings;
+    private TextView bookingsText;
+    private TextView userGreeting;
+
+    private static final String PREFS_NAME = "UserPrefs";
+    private static final String KEY_USERNAME = "username";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bookings);
 
-        bookings = new ArrayList<>();
-        //bookings.add(new Booking("Ο Θείος Βάνιας", "IGK7574", "SUN, 04 JUN 2023 14:30", 1));
-
-        recyclerView = findViewById(R.id.recyclerViewBookings);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new BookingAdapter(bookings, this::onBookingClick);
-        recyclerView.setAdapter(adapter);
-
         setupBottomNav();
+
+        // Συνδέουμε τα στοιχεία της διεπαφής
+        userGreeting = findViewById(R.id.userGreeting);
+        bookingsText = findViewById(R.id.bookingsTextView);
+
+        // Εμφάνιση ονόματος ή "Welcome!"
+        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        String username = prefs.getString(KEY_USERNAME, null);
+
+        if (username != null && !username.isEmpty()) {
+            userGreeting.setText("Bookings for " + username + ":");
+        } else {
+            userGreeting.setText("Welcome!");
+        }
+
+        displayLocalBookings();
     }
 
-    private void onBookingClick(Booking booking) {
-        Intent intent = new Intent(this, BookingDetailsActivity.class);
-        intent.putExtra("booking_title", booking.getTitle());
-        intent.putExtra("booking_code", booking.getCode());
-        intent.putExtra("booking_date", booking.getDate());
-        intent.putExtra("booking_tickets", booking.getTickets());
-        startActivity(intent);
+    private void displayLocalBookings() {
+        List<BookingInfo> list = BookingManager.getBookings();
+        if (list.isEmpty()) {
+            bookingsText.setText("You have no bookings.");
+            return;
+        }
+
+        StringBuilder builder = new StringBuilder();
+        for (BookingInfo booking : list) {
+            builder.append("Title: ").append(booking.title).append("\n")
+                    .append("Time: ").append(booking.datetime).append("\n")
+                    .append("Seat: ").append(booking.seat).append("\n")
+                    .append("Code: ").append(booking.code).append("\n\n");
+        }
+
+        bookingsText.setText(builder.toString().trim());
     }
 
     @Override
@@ -46,4 +63,3 @@ public class BookingsActivity extends BaseActivity {
         return "bookings";
     }
 }
-

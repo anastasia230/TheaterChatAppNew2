@@ -1,5 +1,4 @@
 package com.example.theaterchatappnew2;
-import android.widget.TextView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +15,11 @@ public class HomeActivity extends BaseActivity {
         Button chatbotButton = findViewById(R.id.chatbotButton);
         chatbotButton.setOnClickListener(v -> {
             Intent intent = new Intent(HomeActivity.this, MainActivity.class);
+            startActivity(intent);
+        });
+        Button contactButton = findViewById(R.id.contactUsButton);
+        contactButton.setOnClickListener(v -> {
+            Intent intent = new Intent(HomeActivity.this, ContactActivity.class);
             startActivity(intent);
         });
 

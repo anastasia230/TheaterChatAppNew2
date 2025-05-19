@@ -1,47 +1,49 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_background">
+    android:background="@android:color/white"
+    android:padding="0dp">
 
+    <!-- Greeting -->
     <TextView
-        android:id="@+id/bookingsTitle"
+        android:id="@+id/userGreeting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="My Bookings"
-        android:textSize="24sp"
+        android:text="Welcome!"
+        android:textSize="22sp"
         android:textStyle="bold"
+        android:textColor="#333333"
         android:gravity="center"
-        android:padding="16dp"
-        android:textColor="#000000" />
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:layout_alignParentTop="true" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#CCCCCC" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewBookings"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:padding="16dp"
-        android:contentDescription="bookings_list_description"/>
-
-    <TextView
-        android:id="@+id/emptyMessage"
+    <!-- Scrollable Bookings -->
+    <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="no_bookings"
-        android:textSize="18sp"
-        android:gravity="center"
-        android:padding="24dp"
-        android:visibility="gone"
-        android:textColor="#888888" />
+        android:layout_below="@id/userGreeting"
+        android:layout_above="@id/bottomNavWrapper"
+        android:fillViewport="true"
+        android:padding="16dp">
 
+        <TextView
+            android:id="@+id/bookingsTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Loading bookings..."
+            android:textSize="16sp"
+            android:padding="8dp" />
+    </ScrollView>
 
-    <include
-        layout="@layout/bottom_nav"/>
-</LinearLayout>
+    <!-- Bottom Navigation -->
+    <LinearLayout
+        android:id="@+id/bottomNavWrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <include layout="@layout/bottom_nav" />
+    </LinearLayout>
+</RelativeLayout>
