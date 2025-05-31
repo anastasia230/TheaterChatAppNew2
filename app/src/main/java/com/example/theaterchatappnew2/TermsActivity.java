@@ -11,7 +11,7 @@ public class TermsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_terms);
-        // At the top of onCreate() after setContentView(...)
+
         ImageButton backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(v -> {
             startActivity(new Intent(this, HelpActivity.class));

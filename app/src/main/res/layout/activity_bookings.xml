@@ -32,7 +32,8 @@
             android:layout_height="wrap_content"
             android:text="Loading bookings..."
             android:textSize="16sp"
-            android:padding="8dp" />
+            android:padding="8dp"
+            android:layout_marginTop="626dp"/>
 
 
     <!-- Bottom Navigation -->
