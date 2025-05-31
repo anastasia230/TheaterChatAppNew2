@@ -19,14 +19,12 @@
         android:layout_alignParentTop="true" />
 
     <!-- Scrollable Bookings -->
-    <ScrollView
-        android:id="@+id/scrollView"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/bookingsRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@id/userGreeting"
-        android:layout_above="@id/bottomNavWrapper"
-        android:fillViewport="true"
-        android:padding="16dp">
+        android:layout_marginTop="16dp"/>
 
         <TextView
             android:id="@+id/bookingsTextView"
@@ -35,7 +33,7 @@
             android:text="Loading bookings..."
             android:textSize="16sp"
             android:padding="8dp" />
-    </ScrollView>
+
 
     <!-- Bottom Navigation -->
     <LinearLayout
