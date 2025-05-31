@@ -16,15 +16,45 @@
         android:layout_centerHorizontal="true" />
 
     <TextView
-        android:id="@+id/contactDetails"
+        android:id="@+id/TheaterInfoHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="📧 Email: theater@example.com\n📞 Phone: +30 999 999 999"
+        android:text="Theater Contact Information"
         android:textSize="18sp"
+        android:textStyle="bold"
         android:layout_below="@id/contactTitle"
         android:layout_marginTop="16dp" />
 
     <!-- Bottom Navigation Bar -->
+
+    <TextView
+        android:id="@+id/contactDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/contactTitle"
+        android:layout_marginTop="75dp"
+        android:text="📧 Email: eshop@n-t.gr\n📞 Phone: 210 52 88100\n🌐 Website: http://www.n-t.gr/ \n📍Adress:Αγίου Κωνσταντίνου 22, Αθήνα 104 37"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/CompanyInfoHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/contactTitle"
+        android:layout_marginTop="244dp"
+        android:text="You can reach us through phone or email :"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/CompanycontactDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/contactTitle"
+        android:layout_marginTop="315dp"
+        android:text="📧 Email: theaiter@gmail.com\n📞 Phone: 210 34 12777"
+        android:textSize="18sp" />
+
     <include
         layout="@layout/bottom_nav"
         android:layout_width="match_parent"
