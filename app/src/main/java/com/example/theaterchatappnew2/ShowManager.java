@@ -104,6 +104,7 @@ public class ShowManager {
             seatAvailability.put(key, MAX_SEATS_PER_SHOW);
             seatPointer.put(key, 1);
         }
+        save();
     }
 
     public static String suggestAlternative(String show) {
