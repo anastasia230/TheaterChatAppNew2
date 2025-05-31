@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp">
+
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@android:drawable/ic_menu_revert"
+        android:contentDescription="Back"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:padding="8dp"/>
+
+    <TextView
+        android:id="@+id/termsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Terms &amp; Conditions"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/termsDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Welcome to Tickety, your all-in-one  chatbot for discovering plays, booking theater tickets. Please read these Terms and Conditions carefully before using our app.
+        1. Acceptance of Terms
+        By downloading, accessing, or using Tickety, you agree to be bound by these Terms and our [Privacy Policy]. If you do not agree, please do not use the app.
+        2. Services Provided
+        Tickety provides the following services:
+        Ticket Booking: You can search, select, and book tickets for theater shows.
+        Information on Plays: Browse or ask about upcoming performances, cast details, venue info, and more.
+        Chatbot Support: Use our AI-powered chatbot to get help with ticketing, showtimes, cancellations, and general inquiries.
+        3. User Accounts
+        You may need to create an account to book tickets. You are responsible for maintaining the confidentiality of your account credentials.
+        4. Ticket Bookings
+        All bookings are subject to availability.
+        Tickets are confirmed only after successful payment.
+        Cancellation policies depend on the theater or event organizer.
+        5. Intellectual Property
+        All content in the app, including text, icons, and design, is the property of Tickety or its licensors. You may not reproduce or use it without permission.
+        6. Limitation of Liability
+        Tickety is not responsible for:
+        The accuracy of event information provided by third parties.
+        Delays, cancellations, or changes made by theaters or event organizers.
+        Loss or damage due to technical issues or misuse of the app."
+        android:textSize="16.5sp" />
+</RelativeLayout>

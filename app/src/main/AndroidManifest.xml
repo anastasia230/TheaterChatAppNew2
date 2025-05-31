@@ -27,7 +27,9 @@
         <activity android:name=".MainActivity" android:exported="true" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".HelpActivity" />
-        <activity android:name=".BookingsActivity" /> <!-- ✅ ΝΕΟ -->
+        <activity android:name=".TermsActivity" />
+        <activity android:name=".SettingsActivity" />
+        <activity android:name=".BookingsActivity" />
         <activity android:name=".ContactActivity" />
 
     </application>

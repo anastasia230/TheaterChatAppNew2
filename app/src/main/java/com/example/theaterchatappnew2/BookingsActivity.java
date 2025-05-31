@@ -31,6 +31,8 @@ public class BookingsActivity extends BaseActivity {
         SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         String username = prefs.getString(KEY_USERNAME, null);
 
+        BookingManager.init(getApplicationContext(), username);
+
         if (username != null && !username.isEmpty()) {
             userGreeting.setText("Bookings for " + username + ":");
         } else {

@@ -16,8 +16,7 @@ public class HelpActivity extends BaseActivity {
         Button settingsBtn = findViewById(R.id.settingsButton);
 
         termsBtn.setOnClickListener(v -> {
-            // Navigate to Terms & Conditions activity or webpage
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://example.com/terms")));
+            startActivity(new Intent(this, TermsActivity.class));
         });
 
         websiteBtn.setOnClickListener(v -> {
@@ -25,7 +24,7 @@ public class HelpActivity extends BaseActivity {
         });
 
         settingsBtn.setOnClickListener(v -> {
-            // Optional: open a settings activity
+            startActivity(new Intent(this, SettingsActivity.class));
         });
 
 

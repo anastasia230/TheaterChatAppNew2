@@ -51,10 +51,16 @@ public class MainActivity extends BaseActivity {
         scrollView = findViewById(R.id.scrollView);
 
         SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        prefs.edit().remove(KEY_USERNAME).apply(); // simulate logout
+        //prefs.edit().remove(KEY_USERNAME).apply(); // simulate logout
         currentUserName = null;
 
-        promptForUserName(prefs);
+        currentUserName = prefs.getString(KEY_USERNAME, null);
+        if (currentUserName == null || currentUserName.isEmpty()) {
+            promptForUserName(prefs);
+        } else {
+            BookingManager.init(getApplicationContext(), currentUserName);
+            appendChat(" Hello, " + currentUserName + "! Let's get started.");
+        }
 
         sendButton.setOnClickListener(v -> {
             String userMessage = messageInput.getText().toString().trim();
@@ -85,6 +91,7 @@ public class MainActivity extends BaseActivity {
                 .setPositiveButton("OK", (dialog, which) -> {
                     currentUserName = input.getText().toString().trim();
                     if (currentUserName.isEmpty()) currentUserName = "Guest";
+                    prefs.edit().putString(KEY_USERNAME, currentUserName).apply(); // Save it!
                     BookingManager.init(getApplicationContext(), currentUserName);
                     appendChat(" Hello, " + currentUserName + "! Let's get started.");
                 })
