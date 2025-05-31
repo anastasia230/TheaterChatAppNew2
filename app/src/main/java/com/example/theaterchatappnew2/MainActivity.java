@@ -7,7 +7,12 @@ import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import com.example.theaterchatappnew2.adapters.MessageAdapter;
+import com.example.theaterchatappnew2.models.Message;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,9 +22,9 @@ public class MainActivity extends BaseActivity {
     private Button sendButton;
     private boolean awaitingComplaint = false;
 
-    private TextView chatMessages;
-    private ScrollView scrollView;
-
+    private RecyclerView chatRecyclerView;
+    private MessageAdapter messageAdapter;
+    private List<Message> messageList = new ArrayList<>();
     private boolean awaitingShowChoice = false;
     private boolean awaitingTimeChoice = false;
     private boolean awaitingSeatInput = false;
@@ -47,8 +52,10 @@ public class MainActivity extends BaseActivity {
 
         messageInput = findViewById(R.id.messageInput);
         sendButton = findViewById(R.id.sendButton);
-        chatMessages = findViewById(R.id.chatMessages);
-        scrollView = findViewById(R.id.scrollView);
+        chatRecyclerView = findViewById(R.id.chatRecyclerView);
+        messageAdapter = new MessageAdapter(messageList);
+        chatRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        chatRecyclerView.setAdapter(messageAdapter);
 
         SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         //prefs.edit().remove(KEY_USERNAME).apply(); // simulate logout
@@ -65,7 +72,9 @@ public class MainActivity extends BaseActivity {
         sendButton.setOnClickListener(v -> {
             String userMessage = messageInput.getText().toString().trim();
             if (!userMessage.isEmpty()) {
-                appendChat("You: " + userMessage);
+                messageList.add(new Message(userMessage, true));
+                messageAdapter.notifyItemInserted(messageList.size() - 1);
+                chatRecyclerView.scrollToPosition(messageList.size() - 1);
                 processUserMessage(userMessage.toLowerCase());
                 messageInput.setText("");
             }
@@ -308,8 +317,10 @@ public class MainActivity extends BaseActivity {
     }
 
     private void appendChat(String message) {
-        chatMessages.append("\n" + message);
-        scrollView.post(() -> scrollView.fullScroll(ScrollView.FOCUS_DOWN));
+        // false = bot, true = user (customize as needed)
+        messageList.add(new Message(message, false));
+        messageAdapter.notifyItemInserted(messageList.size() - 1);
+        chatRecyclerView.scrollToPosition(messageList.size() - 1);
     }
 
     @Override
