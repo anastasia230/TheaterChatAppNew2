@@ -1,7 +1,7 @@
 # Theater Chat App
 
 An Android application designed as a chat-based interface to support communication and interactions in a theatrical setting. The app allows users to exchange messages and access a booking feature for theater performances.
-
+watch it here https://www.dropbox.com/scl/fi/a273twg72687218rlptjw/VID_20250601_221601-1.mp4?rlkey=c4z543xqxpuyp489fxuws37n9&st=0sejtbnh&dl=0
 ---
 
 ## Features
